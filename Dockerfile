@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && apt-get install -y \
     apt-transport-https \
     apt-utils \
     ca-certificates \
@@ -11,7 +11,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
     iputils-ping \
     jq \
     lsb-release \
-    software-properties-common
+    software-properties-common \
+    zip \
+    unzip
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
