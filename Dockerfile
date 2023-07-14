@@ -1,8 +1,12 @@
 FROM ubuntu:20.04
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && apt-get install -y \
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+RUN apt-get update
+RUN apt-get upgrade -y
+
+RUN apt-get update && apt-get install -y \
     apt-transport-https \
     apt-utils \
     ca-certificates \
