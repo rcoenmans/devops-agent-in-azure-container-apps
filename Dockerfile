@@ -11,9 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
     iputils-ping \
     jq \
     lsb-release \
-    software-properties-common \
-    zip \
-    unzip
+    software-properties-common
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
