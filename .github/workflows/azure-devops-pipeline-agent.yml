@@ -46,8 +46,9 @@ jobs:
 
       - uses: azure/CLI@v1
         with:
-          azcliversion: 2.0.72
+          azcliversion: 2.30.0
           inlineScript: |
+            az account show
             az deployment group create --resource-group azure-devops-pipeline-agent --template-file infra/azuredeploy.bicep
 
       
