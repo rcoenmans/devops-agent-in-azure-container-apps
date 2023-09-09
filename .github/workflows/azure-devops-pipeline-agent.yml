@@ -35,6 +35,7 @@ jobs:
   azure-infra-foundation:
     name: Deploy Azure Infrastructure
     runs-on: ubuntu-latest
+    needs: build
     permissions:
       contents: read
     steps:
