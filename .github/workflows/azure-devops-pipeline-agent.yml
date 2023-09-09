@@ -31,3 +31,23 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/azure-devops-pipeline-agent:latest
+
+  azure-infra-foundation:
+    name: Deploy Azure Infrastructure
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/CLI@v1
+        with:
+          azcliversion: 2.0.72
+          inlineScript: |
+            az deployment group create --resource-group azure-devops-pipeline-agent --template-file infra/azuredeploy.bicep
+
+      

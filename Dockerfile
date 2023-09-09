@@ -1,7 +1,8 @@
 FROM ubuntu:20.04
 
-ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
+ENV TARGETARCH=linux-x64
 
 RUN apt-get update
 RUN apt-get upgrade -y
@@ -20,8 +21,6 @@ RUN apt-get update && apt-get install -y \
     unzip
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-
-ENV TARGETARCH=linux-x64
 
 WORKDIR /azp
 
