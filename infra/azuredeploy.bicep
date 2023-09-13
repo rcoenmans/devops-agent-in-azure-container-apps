@@ -63,6 +63,16 @@ param minReplicas int = 1
 @maxValue(25)
 param maxReplicas int = 3
 
+@description('Azure DevOps organization URL')
+param azureDevOpsUrl string = 'https://dev.azure.com/'
+
+@description('Azure DevOps PAT token')
+@secure()
+param azureDevOpsPatToken string
+
+@description('Azure DevOps agent pool name')
+param azureDevOpsAgentPoolName string = 'Default'
+
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: containerAppLogAnalyticsName
   location: location
@@ -139,6 +149,20 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
             cpu: json(cpuCore)
             memory: '${memorySize}Gi'
           }
+          env: [
+            {
+              name: 'AZP_URL'
+              value: azureDevOpsUrl
+            }
+            {
+              name: 'AZP_TOKEN'
+              value: azureDevOpsPatToken
+            }
+            {
+              name: 'AZP_POOL'
+              value: azureDevOpsAgentPoolName
+            }
+          ]
         }
       ]
       scale: {

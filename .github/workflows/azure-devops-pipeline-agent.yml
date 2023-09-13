@@ -50,6 +50,10 @@ jobs:
           azcliversion: 2.30.0
           inlineScript: |
             az account show
-            az deployment group create --resource-group azure-devops-pipeline-agent --template-file infra/azuredeploy.bicep
+            az deployment group create \
+              --resource-group azure-devops-pipeline-agent \
+              --template-file infra/azuredeploy.bicep \
+              --parameters infra/azuredeploy.parameters.json \
+              --parameters azureDevOpsUrl=${{ secrets.AZP_URL }} azureDevOpsPatToken=${{ secrets.AZP_TOKEN }}
 
       
