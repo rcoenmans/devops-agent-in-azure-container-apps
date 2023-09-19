@@ -8,6 +8,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 RUN apt-get update && apt-get install -y \
+    wget \
     apt-transport-https \
     apt-utils \
     ca-certificates \
@@ -19,6 +20,14 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     zip \
     unzip
+
+RUN wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+
+RUN apt-get update 
+RUN add-apt-repository universe
+RUN apt-get install -y \
+    powershell
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
